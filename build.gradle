@@ -1,0 +1,96 @@
+buildscript {
+    ext {
+        kotlinVersion = '1.3.31'
+        springBootVersion = '2.1.5.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-noarg:${kotlinVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-spring'
+apply plugin: 'kotlin-jpa'
+apply plugin: 'kotlin-noarg'
+apply plugin: "kotlin-allopen"
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+compileKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+allOpen {
+    annotation("javax.persistence.Entity")
+}
+
+noArg {
+    annotation("javax.persistence.Entity")
+}
+
+dependencies {
+    // Base Web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+    
+    // IO
+    implementation 'org.springframework.shell:spring-shell-starter:2.0.1.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.boot:spring-boot-starter-quartz'
+    
+    // Security - Session
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
+//    implementation 'org.springframework.session:spring-session-data-redis'
+//    implementation 'org.springframework.session:spring-session-jdbc'
+        
+    // Data
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    implementation 'org.springframework.data:spring-data-rest-hal-browser'
+    
+    // Database Drivers
+    runtimeOnly 'com.h2database:h2'
+//    runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+    
+    // Test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.batch:spring-batch-test'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo' // Embedded MongoDB
+
+    // Annotation Processor (application.properties)
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+}
