@@ -1,10 +1,11 @@
 package com.example.sbkotlingradle
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
 import javax.persistence.Entity
 
 @Entity
 data class TodoItem(
-        var label: String,
+        @JacksonXmlProperty var label: String,
         var text: String
 ) : AbstractIdPersistable<Long?>() {
 
