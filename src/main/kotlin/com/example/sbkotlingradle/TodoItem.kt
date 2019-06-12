@@ -1,11 +1,15 @@
 package com.example.sbkotlingradle
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
+import org.hibernate.annotations.Type
+import org.hibernate.type.StandardBasicTypes
+import java.sql.Types
+import javax.persistence.Column
 import javax.persistence.Entity
 
 @Entity
 data class TodoItem(
-        @JacksonXmlProperty var label: String,
+        @Type(type = "text") @JacksonXmlProperty var label: String,
         var text: String
 ) : AbstractIdPersistable<Long?>() {
 

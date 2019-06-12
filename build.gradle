@@ -62,9 +62,17 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // Swagger
+    implementation 'io.springfox:springfox-swagger2:2.9.2'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
     
+    // Xml
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+    implementation 'javax.xml.bind:jaxb-api'
+
     // IO
-    implementation 'org.springframework.shell:spring-shell-starter:2.0.1.RELEASE'
+//    implementation 'org.springframework.shell:spring-shell-starter:2.0.1.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.springframework.boot:spring-boot-starter-quartz'
     
@@ -93,4 +101,8 @@ dependencies {
 
     // Annotation Processor (application.properties)
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+}
+
+test {
+    useJUnitPlatform()
 }
