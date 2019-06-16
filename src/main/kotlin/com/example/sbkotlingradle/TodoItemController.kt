@@ -17,6 +17,7 @@ class TodoItemController(
     @GetMapping("/xml", produces = [MediaType.APPLICATION_XML_VALUE])
     fun getAllXml() = TodoItemsXml(todoItemService.findAll())
 
+    @CAnnotation(5)
     @ApiOperation("Get All Todo JSON", notes = "Get All as Json")
     @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
     fun getAll()= todoItemService.findAll()
